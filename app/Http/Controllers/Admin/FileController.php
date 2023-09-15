@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 use Intervention\Image\Facades\Image;
 
@@ -39,10 +40,7 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        /* $validated = $request->validate([
-            'file' => 'required|image|max:2048'
-        ]);
-
+        /*
         // return $request->file('file')->store('img', 'public'); // retorna: img/name.extension
         // return $request->file('file')->store('public/img'); // retorna: public/img/name.extension
 
@@ -52,19 +50,27 @@ class FileController extends Controller
         // Formatear el path del archivo de public/img/... a storage/img... para poder acceder
         $url = Storage::url($url);
 
-        // Guardar la url en BD
-        $file = File::create([
-            'url' => $url
-        ]); */
+         */
+
+        $validated = $request->validate([
+            'file' => 'required|image'
+        ]);
 
         $file = $request->file('file');
-        $nombre = $file->getClientOriginalName();
+        $nombre = Str::random(10) . $file->getClientOriginalName();
         $path = storage_path() . '\app\public\img\\' . $nombre;
 
         $img = Image::make($file);
 
         // Optimizar el peso de la imagen antes de guardarla
-        $img->resize(300, 300)->save($path);
+        $img->resize(1200, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->save($path);
+
+        // Guardar la url en BD
+        $file = File::create([
+            'url' => '/storage/img/' . $nombre
+        ]);
     }
 
     /**
