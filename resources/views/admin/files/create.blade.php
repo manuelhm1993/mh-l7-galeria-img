@@ -54,7 +54,7 @@
             },
             dictDefaultMessage: "Arrastre una imagen al recuadro para subirlo", // Mensaje por defecto
             acceptedFiles: "image/*", // Tipo de archivos aceptados
-            maxFiles: 20,
+            maxFiles: 30,
             paramName: 'file', // Nombre del input file
         };
     </script>
