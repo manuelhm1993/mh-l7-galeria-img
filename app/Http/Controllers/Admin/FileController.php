@@ -19,7 +19,10 @@ class FileController extends Controller
      */
     public function index()
     {
-        return view('admin.files.index');
+        // Devolver paginados los posts del usuario actualmente autentificado
+        $files = File::where('user_id', auth()->user()->id)->paginate(15);
+
+        return view('admin.files.index', compact('files'));
     }
 
     /**
