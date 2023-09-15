@@ -4,6 +4,10 @@ require('./bootstrap');
 // const { Dropzone } = require("dropzone/dist/dropzone");
 
 // Requerir dropzone en el proyecto
-const { Dropzone } = require("dropzone");
+// const { Dropzone } = require("dropzone");
 
-window.Dropzone = Dropzone;
+// Dropzone.autoDiscover = false;
+
+// window.Dropzone = Dropzone;
+
+// window.Dropzone = require("dropzone");

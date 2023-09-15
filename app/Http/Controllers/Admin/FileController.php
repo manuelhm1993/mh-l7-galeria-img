@@ -54,9 +54,6 @@ class FileController extends Controller
         $file = File::create([
             'url' => $url
         ]);
-
-        // Redirigir al usuario a index con un mensaje flash de feedback
-        return redirect()->route('admin.files.index')->with('feedback', 'created');
     }
 
     /**
