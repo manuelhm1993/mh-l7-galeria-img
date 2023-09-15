@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
+@section('css')
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"> --}}
+@endsection
+
 @section('content')
     <div class="container">
         <section class="row">
             <div class="col">
                 <h1>Subir imagenes</h1>
 
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-body">
-                        {{-- Formulario preparado para trabajar con archivos --}}
                         <form action="{{ route('admin.files.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
-                                {{-- Solo permitir imagenes --}}
                                 <input type="file" name="file" id="file" accept="image/*">
 
-                                {{-- Mostrar el posible error --}}
                                 @error('file')
                                     <small class="text-danger d-block mt-2">
                                         {{ $message }}
@@ -29,8 +30,15 @@
                             </button>
                         </form>
                     </div>
-                </div>
+                </div> --}}
+
+                {{-- Formulario dropzone --}}
+                <form action="{{ route('admin.files.store') }}" class="dropzone" id="form-images"></form>
             </div>
         </section>
     </div>
+@endsection
+
+@section('js')
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script> --}}
 @endsection
