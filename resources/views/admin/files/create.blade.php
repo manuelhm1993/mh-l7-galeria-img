@@ -15,6 +15,13 @@
                             <div class="form-group">
                                 {{-- Solo permitir imagenes --}}
                                 <input type="file" name="file" id="file" accept="image/*">
+
+                                {{-- Mostrar el posible error --}}
+                                @error('file')
+                                    <small class="text-danger d-block mt-2">
+                                        {{ $message }}
+                                    </small>
+                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary">

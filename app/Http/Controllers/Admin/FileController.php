@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin\File;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -36,7 +37,26 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $validated = $request->validate([
+            'file' => 'required|image|max:2048'
+        ]);
+
+        // return $request->file('file')->store('img', 'public'); // retorna: img/name.extension
+        // return $request->file('file')->store('public/img'); // retorna: public/img/name.extension
+
+        // Almacenar el archivo en storage de cualquier forma, yo prefiero esta
+        $url = $request->file('file')->store('img', 'public');
+
+        // Formatear el path del archivo de public/img/... a storage/img... para poder acceder
+        $url = Storage::url($url);
+
+        // Guardar la url en BD
+        $file = File::create([
+            'url' => $url
+        ]);
+
+        // Redirigir al usuario a index con un mensaje flash de feedback
+        return redirect()->route('admin.files.index')->with('feedback', 'created');
     }
 
     /**
