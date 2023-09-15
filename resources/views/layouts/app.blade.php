@@ -37,28 +37,35 @@
                             {{-- Comprueba si es la ruta actual y coloca la clase active --}}
                             <a
                                 href="{{ route('admin.home') }}"
-                                class="nav-link {{ (request()->url() == route('admin.home')) ? 'active' : '' }}">
+                                class="nav-link {{ (request()->routeIs('admin.home')) ? 'active' : '' }}">
                                 Dashboard
                             </a>
                         </li>
 
                         {{-- Menú desplegable --}}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <a
+                                href="#"
+                                {{-- Estará activa en cualquier ruta del submenú --}}
+                                class="nav-link dropdown-toggle {{ (request()->routeIs('admin.files.*')) ? 'active' : '' }}"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-expanded="false"
+                            >
                                 Imagenes
                             </a>
 
                             <div class="dropdown-menu">
                                 <a
                                     href="{{ route('admin.files.index') }}"
-                                    class="dropdown-item {{ (request()->url() == route('admin.files.index')) ? 'active' : '' }}"
+                                    class="dropdown-item {{ (request()->routeIs('admin.files.index')) ? 'active' : '' }}"
                                 >
                                     Ver imagenes
                                 </a>
 
                                 <a
                                     href="{{ route('admin.files.create') }}"
-                                    class="dropdown-item {{ (request()->url() == route('admin.files.create')) ? 'active' : '' }}"
+                                    class="dropdown-item {{ (request()->routeIs('admin.files.create')) ? 'active' : '' }}"
                                 >
                                     Crear imagen
                                 </a>
