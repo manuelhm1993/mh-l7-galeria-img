@@ -33,7 +33,37 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            {{-- Comprueba si es la ruta actual y coloca la clase active --}}
+                            <a
+                                href="{{ route('admin.home') }}"
+                                class="nav-link {{ (request()->url() == route('admin.home')) ? 'active' : '' }}">
+                                Dashboard
+                            </a>
+                        </li>
 
+                        {{-- Menú desplegable --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                Imagenes
+                            </a>
+
+                            <div class="dropdown-menu">
+                                <a
+                                    href="{{ route('admin.files.index') }}"
+                                    class="dropdown-item {{ (request()->url() == route('admin.files.index')) ? 'active' : '' }}"
+                                >
+                                    Ver imagenes
+                                </a>
+
+                                <a
+                                    href="{{ route('admin.files.create') }}"
+                                    class="dropdown-item {{ (request()->url() == route('admin.files.create')) ? 'active' : '' }}"
+                                >
+                                    Crear imagen
+                                </a>
+                            </div>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
