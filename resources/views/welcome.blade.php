@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                <h1>Galería de imagenes MHenriquez</h1>
 
                 <section class="card-columns">
                     @foreach ($files as $file)
