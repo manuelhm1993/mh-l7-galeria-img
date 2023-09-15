@@ -2,10 +2,28 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <section class="row">
             <div class="col">
-                <h1>Crear imagen</h1>
+                <h1>Subir imagenes</h1>
+
+                <div class="card">
+                    <div class="card-body">
+                        {{-- Formulario preparado para trabajar con archivos --}}
+                        <form action="{{ route('admin.files.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="form-group">
+                                {{-- Solo permitir imagenes --}}
+                                <input type="file" name="file" id="file" accept="image/*">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">
+                                Subir imagen
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
 @endsection
