@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Admin\File;
 use Illuminate\Support\Facades\Storage;
 
+use Intervention\Image\Facades\Image;
+
 class FileController extends Controller
 {
     /**
@@ -37,7 +39,7 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        /* $validated = $request->validate([
             'file' => 'required|image|max:2048'
         ]);
 
@@ -53,7 +55,16 @@ class FileController extends Controller
         // Guardar la url en BD
         $file = File::create([
             'url' => $url
-        ]);
+        ]); */
+
+        $file = $request->file('file');
+        $nombre = $file->getClientOriginalName();
+        $path = storage_path() . '\app\public\img\\' . $nombre;
+
+        $img = Image::make($file);
+
+        // Optimizar el peso de la imagen antes de guardarla
+        $img->resize(300, 300)->save($path);
     }
 
     /**
