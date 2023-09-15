@@ -9,4 +9,12 @@ class File extends Model
     protected $fillable = [
         'url'
     ];
+
+    /**
+     * Get the user that owns the file.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

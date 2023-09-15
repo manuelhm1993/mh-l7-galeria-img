@@ -16,7 +16,7 @@ class AddUserIdToFilesTable extends Migration
         Schema::table('files', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->after('id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
