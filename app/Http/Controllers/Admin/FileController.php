@@ -119,6 +119,15 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+        // Cambiar: /storage/image/name.ext -> /public/image/name.ext
+        $url = str_replace('storage', 'public', $file->url);
+
+        // Eliminar la imagen del servidor
+        Storage::delete($url);
+
+        // Eliminar el registro en la base de datos
+        $file->delete();
+
+        return redirect()->route('admin.files.index')->with('feedback', 'deleted');
     }
 }
