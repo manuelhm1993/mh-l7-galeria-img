@@ -69,7 +69,8 @@ class FileController extends Controller
 
         // Guardar la url en BD
         $file = File::create([
-            'url' => '/storage/img/' . $nombre
+            'user_id' => auth()->user()->id,
+            'url'     => '/storage/img/' . $nombre
         ]);
     }
 
