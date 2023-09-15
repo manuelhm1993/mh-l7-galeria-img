@@ -36,7 +36,7 @@
                 <form
                     action="{{ route('admin.files.store') }}"
                     class="dropzone"
-                    id="my-great-dropzone"
+                    id="form-image"
                 >
                 </form>
             </div>
@@ -48,10 +48,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
 
     <script>
-        Dropzone.options.myGreatDropzone = { // camelized version of the `id`
-            headers: {
+        Dropzone.options.formImage = { // Id del formulario en camelCase
+            headers: { // Encabezados, en este caso el csrf
                 'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            }
+            },
+            dictDefaultMessage: "Arrastre una imagen al recuadro para subirlo", // Mensaje por defecto
+            acceptedFiles: "image/*", // Tipo de archivos aceptados
+            maxFilesize: 2, // Mb
+            maxFiles: 20,
+            paramName: 'file', // Nombre del input file
         };
     </script>
 @endsection
